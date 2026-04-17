@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金爾尼國際｜訪廠盡職調查報告</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f4f2ee;
+    --bg2: #ffffff;
+    --bg3: #ece9e3;
+    --border: #d8d3c8;
+    --border2: #bfb8ac;
+    --text: #1a1714;
+    --text2: #6b6258;
+    --accent: #7a5c2e;
+    --accent2: #9e7a3f;
+    --red: #b83232;
+    --green: #2e7d52;
+    --yellow: #8a6010;
+    --blue: #2b5f8a;
+    --radius: 4px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .header-left {}
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .header-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--text2);
+    margin-top: 2px;
+  }
+
+  .header-badge {
+    background: rgba(122,92,46,0.10);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* Nav tabs */
+  .nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* Main layout */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 40px;
+  }
+
+  /* Panels */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Section title */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .section-desc {
+    font-size: 12px;
+    color: var(--text2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Info grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .info-cell {
+    background: var(--bg2);
+    padding: 16px 20px;
+  }
+  .info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .info-value.accent { color: var(--accent); }
+  .info-value.green { color: var(--green); }
+  .info-value.yellow { color: var(--yellow); }
+
+  /* Score cards */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .score-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .score-card.green::before { background: var(--green); }
+  .score-card.yellow::before { background: var(--yellow); }
+  .score-card.red::before { background: var(--red); }
+
+  .score-icon { font-size: 22px; margin-bottom: 8px; }
+  .score-label {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .score-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .score-card.green .score-status { color: var(--green); }
+  .score-card.yellow .score-status { color: var(--yellow); }
+  .score-card.red .score-status { color: var(--red); }
+
+  /* Alert box */
+  .alert {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .alert.warn {
+    background: rgba(138,96,16,0.07);
+    border: 1px solid rgba(138,96,16,0.3);
+  }
+  .alert.success {
+    background: rgba(46,125,82,0.07);
+    border: 1px solid rgba(46,125,82,0.3);
+  }
+  .alert.danger {
+    background: rgba(184,50,50,0.07);
+    border: 1px solid rgba(184,50,50,0.3);
+  }
+  .alert.info {
+    background: rgba(43,95,138,0.07);
+    border: 1px solid rgba(43,95,138,0.3);
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .alert-body {}
+  .alert-title { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
+  .alert-body p { color: var(--text2); font-size: 13px; }
+  .alert-body strong { color: var(--text); font-weight: 600; }
+
+  /* Capability table */
+  .cap-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .cap-table th {
+    background: var(--bg3);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cap-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .cap-table tr:last-child td { border-bottom: none; }
+  .cap-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .cap-table .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+  }
+  .cap-table .tag {
+    display: inline-block;
+    background: rgba(122,92,46,0.10);
+    border: 1px solid rgba(122,92,46,0.3);
+    color: var(--accent);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Risk table */
+  .risk-list { margin-bottom: 24px; }
+  .risk-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    align-items: start;
+  }
+  .risk-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    margin-top: 2px;
+  }
+  .risk-title { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+  .risk-desc { font-size: 12.5px; color: var(--text2); }
+  .risk-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .risk-level.high { background: rgba(184,50,50,0.10); color: var(--red); border: 1px solid rgba(184,50,50,0.3); }
+  .risk-level.mid { background: rgba(138,96,16,0.10); color: var(--yellow); border: 1px solid rgba(138,96,16,0.3); }
+  .risk-level.low { background: rgba(46,125,82,0.10); color: var(--green); border: 1px solid rgba(46,125,82,0.3); }
+
+  /* Checklist panel */
+  .checklist-group { margin-bottom: 32px; }
+  .checklist-group-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .checklist-group-title .group-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    background: var(--bg3);
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+  }
+  .check-item:hover { background: rgba(0,0,0,0.03); border-color: var(--border); }
+  .check-item.checked { background: rgba(46,125,82,0.07); border-color: rgba(46,125,82,0.3); }
+  .check-item.flagged { background: rgba(184,50,50,0.07); border-color: rgba(184,50,50,0.3); }
+
+  .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    font-size: 11px;
+  }
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+  .check-item.flagged .check-box {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  .check-content { flex: 1; }
+  .check-text { font-size: 13.5px; color: var(--text); }
+  .check-note { font-size: 11.5px; color: var(--text2); margin-top: 3px; }
+  .check-priority {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-left: 8px;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+  }
+  .check-priority.must {
+    background: rgba(184,50,50,0.10);
+    color: var(--red);
+    border: 1px solid rgba(184,50,50,0.3);
+  }
+  .check-priority.should {
+    background: rgba(138,96,16,0.10);
+    color: var(--yellow);
+    border: 1px solid rgba(138,96,16,0.25);
+  }
+
+  .check-actions {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .check-btn {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+  }
+  .check-btn:hover { border-color: var(--text2); color: var(--text); }
+  .check-btn.ok:hover { border-color: var(--green); color: var(--green); background: rgba(90,170,122,0.08); }
+  .check-btn.flag:hover { border-color: var(--red); color: var(--red); background: rgba(224,85,85,0.08); }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .progress-stats { flex: 1; }
+  .progress-label {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .progress-track {
+    height: 6px;
+    background: var(--bg3);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--accent));
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  .progress-nums {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .progress-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .progress-num .n { font-size: 16px; font-weight: 600; }
+  .progress-num.ok .n { color: var(--green); }
+  .progress-num.flag .n { color: var(--red); }
+  .progress-num.pending .n { color: var(--text2); }
+
+  .reset-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .reset-btn:hover { border-color: var(--text2); color: var(--text); }
+
+  /* Questions panel */
+  .q-category { margin-bottom: 36px; }
+  .q-category-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .q-category-icon { font-size: 16px; }
+  .q-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-item:hover { border-color: var(--border2); }
+  .q-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    justify-content: space-between;
+  }
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    flex-shrink: 0;
+    margin-top: 3px;
+    min-width: 28px;
+  }
+  .q-text { font-size: 13.5px; color: var(--text); flex: 1; }
+  .q-expand {
+    font-size: 10px;
+    color: var(--text2);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .q-item.open .q-expand { transform: rotate(180deg); }
+  .q-body {
+    display: none;
+    padding: 0 18px 16px 58px;
+  }
+  .q-item.open .q-body { display: block; }
+  .q-intent {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .q-intent strong { color: var(--accent); }
+  .q-followup {
+    font-size: 12px;
+    color: var(--text2);
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: var(--radius);
+    border-left: 2px solid var(--border2);
+  }
+  .q-followup strong { color: var(--text); font-size: 11px; display: block; margin-bottom: 4px; }
+  .q-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.08em;
+  }
+  .q-tag.critical {
+    background: rgba(184,50,50,0.10);
+    color: var(--red);
+    border: 1px solid rgba(184,50,50,0.25);
+  }
+  .q-tag.important {
+    background: rgba(138,96,16,0.10);
+    color: var(--yellow);
+    border: 1px solid rgba(138,96,16,0.25);
+  }
+
+  /* Notes panel */
+  .notes-wrap {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 24px;
+  }
+  @media (max-width: 768px) {
+    .notes-wrap { grid-template-columns: 1fr; }
+  }
+  .notes-main {}
+  .notes-area {
+    width: 100%;
+    min-height: 400px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.8;
+    padding: 20px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .notes-area:focus { border-color: var(--accent); }
+  .notes-area::placeholder { color: var(--text2); }
+  .notes-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .notes-sidebar {}
+  .sidebar-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .sidebar-card-title {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .doc-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .doc-item:last-child { border-bottom: none; }
+  .doc-check {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--border2);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .doc-item.got .doc-check {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+  .doc-label { font-size: 12px; color: var(--text); flex: 1; }
+
+  /* Overall verdict */
+  .verdict {
+    background: var(--bg2);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .verdict-icon { font-size: 28px; flex-shrink: 0; }
+  .verdict-content {}
+  .verdict-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .verdict-text {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .verdict-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+  .verdict-desc strong { color: var(--text); }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .header { padding: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .nav { padding: 0 20px; }
+    .main { padding: 24px 20px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .score-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Utility */
+  .mb-24 { margin-bottom: 24px; }
+  .mb-16 { margin-bottom: 16px; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-label">訪廠盡職調查報告 / Due Diligence</div>
+    <div class="header-title">金爾尼國際有限公司</div>
+    <div class="header-sub">台中市烏日區環中路八段680巷8號 ｜ 統編 42896818</div>
+  </div>
+  <div class="header-badge">2026.04 調查</div>
+</div>
+
+<div class="nav">
+  <div class="nav-tab active" onclick="showPanel('overview')">總覽</div>
+  <div class="nav-tab" onclick="showPanel('capability')">產能評估</div>
+  <div class="nav-tab" onclick="showPanel('risk')">風險警示</div>
+  <div class="nav-tab" onclick="showPanel('checklist')">現場查核清單</div>
+  <div class="nav-tab" onclick="showPanel('questions')">訪廠提問庫</div>
+  <div class="nav-tab" onclick="showPanel('notes')">訪廠記錄</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW PANEL -->
+  <div id="panel-overview" class="panel active">
+    <div class="section-header">
+      <div class="section-title">背調總覽</div>
+      <div class="section-desc">BACKGROUND INVESTIGATION SUMMARY</div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-icon">🏭</div>
+      <div class="verdict-content">
+        <div class="verdict-label">綜合評估結論</div>
+        <div class="verdict-text">無重大紅旗，適合小量彈性合作，大量供貨需現場驗證</div>
+        <div class="verdict-desc">整體而言，金爾尼是一家<strong>無重大食安或司法爭議</strong>的中小型代工廠，持有 ISO 22000 + HACCP 認證。主要風險在於資本規模偏小（1,600萬）、公司年資僅7年，適合低MOQ試產或軟糖多劑型彈性合作。若需穩定大量供貨，建議現場實地確認產能排程與客戶滿載率後再決策。</div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-title">基本公司資料</div>
+      <div class="section-desc">COMPANY PROFILE</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-cell">
+        <div class="info-label">公司全名</div>
+        <div class="info-value accent">金爾尼國際有限公司</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">英文名稱</div>
+        <div class="info-value">Kierney International Ltd.</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">統一編號</div>
+        <div class="info-value">42896818</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">負責人</div>
+        <div class="info-value">徐佩君</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">設立日期</div>
+        <div class="info-value">2018年4月9日（公司年齡約7年）</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">資本額</div>
+        <div class="info-value yellow">新台幣 1,600 萬元</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">登記地址</div>
+        <div class="info-value">台中市烏日區環中路八段680巷8號</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">電話</div>
+        <div class="info-value">04-23356060</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">食品業者登錄字號</div>
+        <div class="info-value green">B-142896818-00000-5 ✓</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">營業稅籍分類</div>
+        <div class="info-value">未分類其他食品批發</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">ISO 22000 認證</div>
+        <div class="info-value yellow">官網聲稱持有（需核對原件）</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-label">HACCP 認證</div>
+        <div class="info-value yellow">官網聲稱持有（需核對原件）</div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-title">六大面向評分</div>
+      <div class="section-desc">RISK SCORING</div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-card green">
+        <div class="score-icon">🛡️</div>
+        <div class="score-label">資質合法性</div>
+        <div class="score-status">PASS</div>
+      </div>
+      <div class="score-card green">
+        <div class="score-icon">🍽️</div>
+        <div class="score-label">食安紀錄</div>
+        <div class="score-status">無異常</div>
+      </div>
+      <div class="score-card yellow">
+        <div class="score-icon">👷</div>
+        <div class="score-label">勞動合規</div>
+        <div class="score-status">小瑕疵</div>
+      </div>
+      <div class="score-card yellow">
+        <div class="score-icon">🏢</div>
+        <div class="score-label">公司規模</div>
+        <div class="score-status">偏小</div>
+      </div>
+      <div class="score-card green">
+        <div class="score-icon">⚖️</div>
+        <div class="score-label">司法爭議</div>
+        <div class="score-status">無紀錄</div>
+      </div>
+      <div class="score-card green">
+        <div class="score-icon">📰</div>
+        <div class="score-label">媒體負評</div>
+        <div class="score-status">無報導</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPABILITY PANEL -->
+  <div id="panel-capability" class="panel">
+    <div class="section-header">
+      <div class="section-title">產能與服務評估</div>
+      <div class="section-desc">CAPABILITY ASSESSMENT</div>
+    </div>
+
+    <table class="cap-table">
+      <thead>
+        <tr>
+          <th>設備</th>
+          <th>服務項目</th>
+          <th>日產能</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>膠囊填充機</td>
+          <td>膠囊入罐 / 膠囊入袋 / 混裝</td>
+          <td class="num">9 萬粒</td>
+          <td><span class="tag">自動</span></td>
+        </tr>
+        <tr>
+          <td>三面封機</td>
+          <td>粉包三面封</td>
+          <td class="num">2 萬包</td>
+          <td><span class="tag">自動</span></td>
+        </tr>
+        <tr>
+          <td>PP瓶粉末填充機</td>
+          <td>粉末入PP瓶</td>
+          <td class="num">2 萬瓶</td>
+          <td><span class="tag">自動</span></td>
+        </tr>
+        <tr>
+          <td>軟糖澆注機</td>
+          <td>軟糖入袋</td>
+          <td class="num">10 萬顆</td>
+          <td><span class="tag">半自動</span></td>
+        </tr>
+        <tr>
+          <td>PTP打片機</td>
+          <td>鋁箔押片包裝</td>
+          <td class="num">未揭露</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>鋁袋填充</td>
+          <td>粉末入鋁袋</td>
+          <td class="num">未揭露</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert warn mb-16">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">軟糖澆注機為半自動設備</div>
+        <p>官網圖片顯示軟糖澆注機為<strong>半自動</strong>機型，日產10萬顆。若 UNIQMAN 軟糖需求量大（如每月百萬顆以上），需現場確認實際月產能上限與排程滿載率。</p>
+      </div>
+    </div>
+
+    <div class="alert info mb-16">
+      <div class="alert-icon">ℹ️</div>
+      <div class="alert-body">
+        <div class="alert-title">一站式 ODM 服務</div>
+        <p>提供<strong>研發配方、包裝設計、行銷支援</strong>三合一 ODM 服務。若有新品需客製配方，可評估是否善用其研發資源，降低自行委外研發成本。</p>
+      </div>
+    </div>
+
+    <div class="alert success mb-16">
+      <div class="alert-icon">✅</div>
+      <div class="alert-body">
+        <div class="alert-title">符合 UNIQMAN 現有需求品類</div>
+        <p>膠囊（苦瓜胜肽等）、軟糖、粉包均在其核心能力範圍內。產品開發實例包含<strong>黑苦瓜胜肽膠囊、魚油軟膠囊、蚓激酶膠囊</strong>，與公司產品線高度重疊。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK PANEL -->
+  <div id="panel-risk" class="panel">
+    <div class="section-header">
+      <div class="section-title">風險警示</div>
+      <div class="section-desc">RISK FLAGS</div>
+    </div>
+
+    <div class="alert warn mb-24">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">已查到 1 筆勞動違規裁罰</div>
+        <p>2023年8月24日，因<strong>未按時繳納勞工退休金</strong>遭主管機關裁罰，滯納金金額330元。性質為行政怠惰，非重大違法，但代表公司在勞動合規細節上有一定粗心，現場可詢問是否已改善。</p>
+      </div>
+    </div>
+
+    <div class="risk-list">
+
+      <div class="risk-item">
+        <div class="risk-num">01</div>
+        <div>
+          <div class="risk-title">認證範圍是否涵蓋軟糖劑型</div>
+          <div class="risk-desc">ISO 22000 + HACCP 認證書需核對原件，確認認證<strong>涵蓋範圍</strong>是否包含軟糖、錠劑等您需要的劑型，部分工廠認證僅限膠囊/粉包。</div>
+        </div>
+        <div class="risk-level high">高風險</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num">02</div>
+        <div>
+          <div class="risk-title">食品工廠登記劑型範圍</div>
+          <div class="risk-desc">食品業者登錄已確認，但工廠登記中是否有<strong>登記軟糖、錠劑</strong>等需要的劑型？若無登記卻承接生產，屬於超範圍違規。</div>
+        </div>
+        <div class="risk-level high">高風險</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num">03</div>
+        <div>
+          <div class="risk-title">無 GMP 認證提及</div>
+          <div class="risk-desc">官網僅提到 ISO 22000 + HACCP，未提到衛福部食品GMP或食品GHP（良好衛生規範準則）。若客戶或通路要求GMP資格，需現場確認。</div>
+        </div>
+        <div class="risk-level mid">中風險</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num">04</div>
+        <div>
+          <div class="risk-title">資本規模偏小，財務穩定性待評估</div>
+          <div class="risk-desc">資本額僅1,600萬元，公司年資7年，屬中小型代工廠。大量訂單時需評估其<strong>原料採購資金周轉</strong>與交期穩定性是否足夠。</div>
+        </div>
+        <div class="risk-level mid">中風險</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num">05</div>
+        <div>
+          <div class="risk-title">300+ 成功案例無法驗證</div>
+          <div class="risk-desc">官網聲稱「300+ 成功案例」定義模糊，未提供知名客戶背書。現場應要求提供<strong>具體合作品牌或產品範例</strong>（含保密前提下）以核實。</div>
+        </div>
+        <div class="risk-level mid">中風險</div>
+      </div>
+
+      <div class="risk-item">
+        <div class="risk-num">06</div>
+        <div>
+          <div class="risk-title">勞動法令合規滯納金裁罰</div>
+          <div class="risk-desc">2023年8月遭裁罰滯納金330元，金額雖小，仍顯示合規細節上有粗心。建議詢問是否已補齊制度。</div>
+        </div>
+        <div class="risk-level low">低風險</div>
+      </div>
+
+    </div>
+
+    <div class="alert success">
+      <div class="alert-icon">✅</div>
+      <div class="alert-body">
+        <div class="alert-title">查無食安事件、司法紀錄、媒體負評</div>
+        <p>搜尋結果中未發現任何食品安全違規、食藥署裁罰、食安事件、刑事司法紀錄或媒體負面新聞，為正面訊號。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST PANEL -->
+  <div id="panel-checklist" class="panel">
+    <div class="section-header">
+      <div class="section-title">現場查核清單</div>
+      <div class="section-desc">ON-SITE INSPECTION CHECKLIST — 點擊可標記完成或異常</div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-stats">
+        <div class="progress-label">查核進度</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-nums">
+          <div class="progress-num ok"><span class="n" id="cnt-ok">0</span> 項通過</div>
+          <div class="progress-num flag"><span class="n" id="cnt-flag">0</span> 項異常</div>
+          <div class="progress-num pending"><span class="n" id="cnt-pending">0</span> 項待確認</div>
+        </div>
+      </div>
+      <button class="reset-btn" onclick="resetChecklist()">↺ 重置</button>
+    </div>
+
+    <div id="checklist-container">
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">01</span> 資質與證照（必查）
+        </div>
+        <div class="check-item" data-id="c01" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">食品工廠登記證原件 — 確認登記項目涵蓋需要的劑型<span class="check-priority must">必查</span></div>
+            <div class="check-note">特別確認軟糖、錠劑是否在登記範圍內</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c02" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">ISO 22000 認證書原件 — 核對效期與認證範圍<span class="check-priority must">必查</span></div>
+            <div class="check-note">確認認證機構、有效期限是否在有效期內</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c03" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">HACCP 認證書原件 — 核對效期與認證範圍<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c04" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">食品業者登錄查詢（食藥署官網現場比對）<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c05" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">近三年食藥署稽查紀錄 — 是否有裁罰或缺失<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">02</span> 廠房硬體與環境
+        </div>
+        <div class="check-item" data-id="c06" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">潔淨室等級 — 確認正壓區、更衣室、空氣過濾系統<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c07" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">原料倉、成品倉溫濕度控管 — 有無空調與紀錄</div>
+            <div class="check-note">軟糖對溫濕度特別敏感，需確認冷藏/恆溫設備</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c08" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">蟲害防治設施 — 捕蟲燈、防鼠設施、定期除蟲紀錄</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c09" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">廠區動線 — 原料進料→加工→成品出貨是否清晰，無交叉污染</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c10" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">廠區整潔度 — 地板、設備表面、天花板有無積塵或積水</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">03</span> 設備能力（重點：軟糖線）
+        </div>
+        <div class="check-item" data-id="c11" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">軟糖澆注機是否為半自動 — 確認實際月產能上限<span class="check-priority must">必查</span></div>
+            <div class="check-note">官網顯示為半自動機型，日產10萬顆，需換算月產能是否足夠</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c12" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">設備保養紀錄 — 查閱最近一次維保記錄</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c13" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">換線清潔（Changeover）流程 — 不同客戶產品之間的清潔程序</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c14" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">目前排程滿載率 — 若超過80%需注意插單風險<span class="check-priority should">建議</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">04</span> 品質管制
+        </div>
+        <div class="check-item" data-id="c15" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">IQC / IPQC / OQC 三段品管 — 確認各階段品管制度是否完整<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c16" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">留樣室與留樣制度 — 建議至少保留至效期後6個月</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c17" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">近期第三方檢驗報告（重金屬、微生物、農藥殘留）<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c18" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">批次紀錄（Batch Record）完整性 — 可追溯性</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c19" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">不合格品隔離與處理流程</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">05</span> 原物料管理
+        </div>
+        <div class="check-item" data-id="c20" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">合格供應商名單（AVL）與定期審核機制<span class="check-priority must">必查</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c21" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">原料入廠逐批檢驗、COA（原料規格書）制度</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c22" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">若代採購原料 — 加價幅度是否透明揭露<span class="check-priority should">建議</span></div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-title">
+          <span class="group-num">06</span> 現場軟實力觀察
+        </div>
+        <div class="check-item" data-id="c23" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">員工進出廠區確實換裝、戴手套口罩</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c24" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">廠長/品管主管能清楚回答專業問題（應變能力）</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+        <div class="check-item" data-id="c25" onclick="cycleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-content">
+            <div class="check-text">溝通態度 — 是否主動揭露限制，而非一味說「沒問題」</div>
+          </div>
+          <div class="check-actions">
+            <button class="check-btn ok" onclick="setCheck(event,this,'checked')">✓</button>
+            <button class="check-btn flag" onclick="setCheck(event,this,'flagged')">✗</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUESTIONS PANEL -->
+  <div id="panel-questions" class="panel">
+    <div class="section-header">
+      <div class="section-title">訪廠提問庫</div>
+      <div class="section-desc">FACTORY VISIT QUESTIONS — 點擊展開提問意圖與追問</div>
+    </div>
+
+    <div class="q-category">
+      <div class="q-category-title">
+        <span class="q-category-icon">📋</span> 資質與合規
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q01</div>
+          <div class="q-text">可以讓我看一下食品工廠登記證原件嗎？哪些劑型在登記範圍內？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>確認工廠登記劑型涵蓋軟糖、膠囊、粉包，若超範圍生產屬違規，後續食安事件你的品牌連帶受害。</div>
+          <div class="q-followup"><strong>追問：</strong>若軟糖不在範圍內，是否有計畫申請擴充？時程多久？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q02</div>
+          <div class="q-text">ISO 22000 和 HACCP 認證書的認證範圍是什麼？有效期限到何時？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>官網有圖片但需核對原件。認證範圍可能僅限特定劑型，若不含軟糖線則認證等同無效。</div>
+          <div class="q-followup"><strong>追問：</strong>最近一次年審是什麼時候？有無收到任何改善要求？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q03</div>
+          <div class="q-text">有沒有申請衛福部的食品GMP認證？<span class="q-tag important">重要</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>官網未提及食品GMP，若往來通路（如藥局、連鎖超市）有要求GMP資格，需提前確認。</div>
+          <div class="q-followup"><strong>追問：</strong>若無，是否有申請規劃？預計何時通過？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q04</div>
+          <div class="q-text">去年（2024-2025）有沒有被食藥署或地方衛生局稽查？結果如何？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>若有缺失要求改善，看對方是否主動揭露。若刻意隱瞞，是重大信任風險。</div>
+          <div class="q-followup"><strong>追問：</strong>可以看一下稽查紀錄嗎？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-category">
+      <div class="q-category-title">
+        <span class="q-category-icon">🏭</span> 產能與交期
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q05</div>
+          <div class="q-text">軟糖線現在的月產能上限是多少？目前排程滿了幾成？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>官網說日產10萬顆，但若排程80%滿，月底旺季可能塞單。直接問滿載率，看對方是否誠實。</div>
+          <div class="q-followup"><strong>追問：</strong>旺季（年底、過年前）有沒有特別備料或排班？我們的訂單能保證排進嗎？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q06</div>
+          <div class="q-text">從打樣到量產的標準流程大概要多久？<span class="q-tag important">重要</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>評估新品上市時程，確認是否符合公司內部規劃節奏。</div>
+          <div class="q-followup"><strong>追問：</strong>若要修改配方（例如口感、色澤），會再延多久？費用怎麼算？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q07</div>
+          <div class="q-text">軟糖的最低訂購量（MOQ）是多少？可以少量試產嗎？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>官網宣稱「低MOQ生產」，確認實際數字是否符合公司測試市場的需求（例如3,000盒起）。</div>
+          <div class="q-followup"><strong>追問：</strong>試產跟量產的單價差距大嗎？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-category">
+      <div class="q-category-title">
+        <span class="q-category-icon">🔬</span> 品質管制
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q08</div>
+          <div class="q-text">可以看一下近期的第三方檢驗報告嗎（重金屬、微生物、農藥殘留）？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>第三方報告是最客觀的品質憑證，若對方無法提供或只有一年前的報告，是重要警訊。</div>
+          <div class="q-followup"><strong>追問：</strong>委託哪家檢驗機構？我們的品項會需要哪些額外的功效性檢測？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q09</div>
+          <div class="q-text">批次紀錄（Batch Record）保存多久？出問題時可以追溯到哪個環節？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>若未來出現消費者申訴，能否快速鎖定問題批次，是風險控管的核心能力。</div>
+          <div class="q-followup"><strong>追問：</strong>有沒有發生過需要回收的事件？當時怎麼處理？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q10</div>
+          <div class="q-text">留樣室是怎麼管理的？留樣保存到什麼時候？<span class="q-tag important">重要</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>正規工廠至少保留至效期後6個月，若無留樣制度，消費者申訴時無法舉證，品牌風險極高。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-category">
+      <div class="q-category-title">
+        <span class="q-category-icon">💼</span> 商務條件與智財保護
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q11</div>
+          <div class="q-text">願意簽保密協議（NDA）嗎？我們的配方歸屬如何約定？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>防止配方外洩給競爭對手。特別確認配方是「客戶所有」還是「工廠共享」。</div>
+          <div class="q-followup"><strong>追問：</strong>若我們帶自有配方來，工廠是否會將此配方提供給其他客戶？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q12</div>
+          <div class="q-text">報價結構是怎麼組成的？工繳費、物料費、包材費能分開列示嗎？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>了解成本結構，確認有無隱性加收費用，也便於日後漲價談判時有基礎比對。</div>
+          <div class="q-followup"><strong>追問：</strong>原料漲價時，如何通知我方？提前多久？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q13</div>
+          <div class="q-text">若產品出現品質問題，責任如何界定？有沒有產品責任險？<span class="q-tag important">重要</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>萬一食安事件發生，品牌方往往承擔輿論壓力，但若生產端有問題，工廠是否有能力賠償或共同承擔。</div>
+          <div class="q-followup"><strong>追問：</strong>過去有沒有發生過品質糾紛？是怎麼處理的？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q14</div>
+          <div class="q-text">可以提供1-2個現有客戶做參考（保密前提下）嗎？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>官網聲稱300+案例，但無法驗證。能否提供一個可聯繫確認的參考客戶，是評估可信度的重要依據。</div>
+          <div class="q-followup"><strong>追問：</strong>有沒有跟百貨通路或藥局品牌合作過的案例？</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-category">
+      <div class="q-category-title">
+        <span class="q-category-icon">⚙️</span> 針對 UNIQMAN 軟糖專屬提問
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q15</div>
+          <div class="q-text">做過果膠軟糖（pectin-based）嗎？還是以明膠（gelatin）為主？<span class="q-tag critical">關鍵</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>若 UNIQMAN 定位清真或素食族群，需確認能否做果膠配方。兩者製程差異大，工廠不見得都有能力。</div>
+          <div class="q-followup"><strong>追問：</strong>果膠軟糖的脫模良率大約多少？有沒有做過樣品可以看？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q16</div>
+          <div class="q-text">軟糖的有效期限最長可以做到多久？防腐劑用什麼？<span class="q-tag important">重要</span></div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>保健軟糖需兼顧保存期（通常12-18個月）與法規限制的添加物，需確認不衝突。</div>
+          <div class="q-followup"><strong>追問：</strong>包裝使用鋁袋還是一般PE袋？對效期影響多大？</div>
+        </div>
+      </div>
+
+      <div class="q-item" onclick="toggleQ(this)">
+        <div class="q-header">
+          <div class="q-num">Q17</div>
+          <div class="q-text">有效期限的印製方式是什麼（噴碼機型號）？包材上印得清晰嗎？</div>
+          <div class="q-expand">▼</div>
+        </div>
+        <div class="q-body">
+          <div class="q-intent">🎯 <strong>提問意圖：</strong>PVC或鋁箔包材的日期印製需要CIJ或UV噴碼機，普通熱轉印可能不持久，需確認。</div>
+          <div class="q-followup"><strong>追問：</strong>可以讓我看一下實際成品的日期印製效果嗎？</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES PANEL -->
+  <div id="panel-notes" class="panel">
+    <div class="section-header">
+      <div class="section-title">訪廠記錄</div>
+      <div class="section-desc">SITE VISIT NOTES</div>
+    </div>
+
+    <div class="notes-wrap">
+      <div class="notes-main">
+        <label class="notes-label">現場觀察紀錄</label>
+        <textarea class="notes-area" placeholder="在此記錄現場觀察、問答內容、第一印象...
+
+例如：
+- 廠長姓名：
+- 到場時間：
+- 廠區第一印象：
+- 有無異味 / 整潔度：
+- 設備新舊程度：
+- 品管主管說明是否清晰：
+- 特別注意事項："></textarea>
+        <div style="margin-top: 12px;">
+          <label class="notes-label">整體評估 / 合作意願</label>
+          <textarea class="notes-area" style="min-height: 160px;" placeholder="訪廠後綜合評估：
+
+合作意願：□ 強烈推薦  □ 有條件合作  □ 暫不考慮
+主要顧慮：
+建議下一步："></textarea>
+        </div>
+      </div>
+
+      <div class="notes-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">📁 需索取的文件</div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">食品工廠登記證影本</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">ISO 22000 認證書影本</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">HACCP 認證書影本</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">近期第三方檢驗報告</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">標準報價單（含拆項）</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">合作客戶參考名單</div>
+          </div>
+          <div class="doc-item" onclick="toggleDoc(this)">
+            <div class="doc-check"></div>
+            <div class="doc-label">保密協議（NDA）範本</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">📞 聯絡資料</div>
+          <div style="font-size: 12px; color: var(--text2); line-height: 2;">
+            <div>📞 04-23356060</div>
+            <div>📍 台中市烏日區</div>
+            <div style="margin-top: 8px; color: var(--text);">負責人：徐佩君</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">⚠️ 重點提醒</div>
+          <div style="font-size: 12px; color: var(--text2); line-height: 1.8;">
+            <div>• 先核對認證書原件效期</div>
+            <div>• 確認軟糖劑型登記範圍</div>
+            <div>• 詢問軟糖線滿載率</div>
+            <div>• 索取第三方檢驗報告</div>
+            <div>• NDA簽署意願</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggleQ(el) {
+    el.classList.toggle('open');
+  }
+
+  // Checklist logic
+  function cycleCheck(el) {
+    if (el.classList.contains('checked')) {
+      el.classList.remove('checked');
+      el.classList.add('flagged');
+      el.querySelector('.check-box').textContent = '✗';
+    } else if (el.classList.contains('flagged')) {
+      el.classList.remove('flagged');
+      el.querySelector('.check-box').textContent = '';
+    } else {
+      el.classList.add('checked');
+      el.querySelector('.check-box').textContent = '✓';
+    }
+    updateProgress();
+  }
+
+  function setCheck(e, btn, state) {
+    e.stopPropagation();
+    const item = btn.closest('.check-item');
+    item.classList.remove('checked', 'flagged');
+    const box = item.querySelector('.check-box');
+    if (state === 'checked') {
+      item.classList.add('checked');
+      box.textContent = '✓';
+    } else {
+      item.classList.add('flagged');
+      box.textContent = '✗';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const items = document.querySelectorAll('.check-item');
+    const ok = document.querySelectorAll('.check-item.checked').length;
+    const flag = document.querySelectorAll('.check-item.flagged').length;
+    const total = items.length;
+    const pending = total - ok - flag;
+    const pct = Math.round((ok + flag) / total * 100);
+    document.getElementById('cnt-ok').textContent = ok;
+    document.getElementById('cnt-flag').textContent = flag;
+    document.getElementById('cnt-pending').textContent = pending;
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }
+
+  function resetChecklist() {
+    document.querySelectorAll('.check-item').forEach(item => {
+      item.classList.remove('checked', 'flagged');
+      item.querySelector('.check-box').textContent = '';
+    });
+    updateProgress();
+  }
+
+  function toggleDoc(el) {
+    el.classList.toggle('got');
+    el.querySelector('.doc-check').textContent = el.classList.contains('got') ? '✓' : '';
+  }
+
+  // Init
+  updateProgress();
+</script>
+</body>
+</html>
